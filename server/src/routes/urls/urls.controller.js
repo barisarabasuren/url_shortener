@@ -17,11 +17,9 @@ const httphandleNewUrl = (req, res) => {
 
     if(urlIndex) {
         updateUrl(urlIndex);
-        console.log('update')
         return res.status(200).json(url)
     } else {
         addNewUrl(url);
-        console.log('add new')
         return res.status(201).json(url);
     }
 }

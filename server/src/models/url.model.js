@@ -1,25 +1,25 @@
 const urls = [
     {
-        id: 1,
+        id: '1',
         date: 'Mar 3',
-        url: 'url1',
-        shortened_url: 'shorturl1',
+        url: 'www.facebook.com',
+        shortened_url: 'short1',
         visits: 0,
         creationAttempt: 1
     },
     {
-        id: 2,
+        id: '2',
         date: 'Mar 3',
-        url: 'url2',
-        shortened_url: 'shorturl2',
+        url: 'www.amazon.com',
+        shortened_url: 'short2',
         visits: 5,
         creationAttempt: 1
     },
     {
-        id: 3,
+        id: '3',
         date: 'Mar 3',
-        url: 'url3',
-        shortened_url: 'shorturl3',
+        url: 'app.code.berlin',
+        shortened_url: 'short3',
         visits: 3,
         creationAttempt: 1
     }
@@ -39,14 +39,24 @@ const doesUrlExist = (url) => {
     return false;
 }
 
+const getFromShortUrl = (shortened_url) => {
+    for (let i = 0; i < urls.length; i++) {
+        if(urls[i].shortened_url == shortened_url ) {
+            return urls[i]
+        };
+    }
+
+    return false;
+}
+
 const addNewUrl = (data) => {
     const lastId = urls[urls.length - 1].id;
 
     urls.push({
-        id:lastId + 1,
+        id: (parseInt(lastId) + 1).toString(),
         date: new Date(),
         url: data.url,
-        shortened_url: 'shorturl3',
+        shortened_url: 'shortx',
         visits: 0,
         creationAttempt: 1
     }) 
@@ -61,14 +71,13 @@ const updateUrl = (i) => {
         visits: urls[i].visits,
         creationAttempt: urls[i].creationAttempt + 1
     }
-
-    return urls[i]
 }
 
 module.exports = {
     urls,
     getAllUrls,
     doesUrlExist,
+    getFromShortUrl,
     addNewUrl,
     updateUrl
 }
