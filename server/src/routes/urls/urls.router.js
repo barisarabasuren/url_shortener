@@ -1,10 +1,10 @@
 const express = require('express');
 
-const { httpGetAllUrls, httphandleNewUrl } = require('./urls.controller')
+const { httpGetAllUrls, httpHandleNewUrl } = require('./urls.controller')
 
 const urlsRouter = express.Router();
 
 urlsRouter.get('/urls', httpGetAllUrls);
-urlsRouter.put('/urls', httphandleNewUrl);
+urlsRouter.put('/urls', httpHandleNewUrl);
 
 module.exports = urlsRouter

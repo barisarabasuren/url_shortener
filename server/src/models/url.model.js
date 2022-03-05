@@ -43,13 +43,12 @@ const getAllUrls = () => {
     return urls
 }
 
-const doesUrlExist = (url) => {
+const doesUrlExist = (body) => {
     for (let i = 0; i < urls.length; i++) {
-        if(urls[i].url == url ) {
+        if(urls[i].url == body.url ) {
             return i
         };
     }
-
     return false;
 }
 
@@ -74,7 +73,7 @@ const addNewUrl = (data) => {
     }) 
 }
 
-const updateUrl = (i) => {
+const updateCreationAttempt = (i) => {
     urls[i] = {
         id:urls[i].id,
         date: urls[i].date,
@@ -85,11 +84,27 @@ const updateUrl = (i) => {
     }
 }
 
+const updateVisits = (object) => {
+    for(let i = 0; i < urls.length; i++) {
+        if(urls[i] == object) {
+            urls[i] = {
+                id:urls[i].id,
+                date: urls[i].date,
+                url: urls[i].url,
+                shortened_url: urls[i].shortened_url,
+                visits: urls[i].visits + 1,
+                creationAttempt: urls[i].creationAttempt
+            }
+        }
+    }
+}
+
 module.exports = {
     urls,
     getAllUrls,
     doesUrlExist,
     getFromShortUrl,
     addNewUrl,
-    updateUrl
+    updateCreationAttempt,
+    updateVisits
 }
