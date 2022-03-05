@@ -25,6 +25,20 @@ const urls = [
     }
 ]
 
+const generateString = (length) => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(
+            Math.floor(
+                Math.random() * charactersLength
+                )
+        );
+    }
+    return result;
+}
+
 const getAllUrls = () => {
     return urls
 }
@@ -50,13 +64,11 @@ const getFromShortUrl = (shortened_url) => {
 }
 
 const addNewUrl = (data) => {
-    const lastId = urls[urls.length - 1].id;
-
     urls.push({
-        id: (parseInt(lastId) + 1).toString(),
+        id: generateString(10),
         date: new Date(),
         url: data.url,
-        shortened_url: 'shortx',
+        shortened_url: generateString(5),
         visits: 0,
         creationAttempt: 1
     }) 
