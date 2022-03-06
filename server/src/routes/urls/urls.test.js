@@ -30,7 +30,7 @@ describe('Launches API', () => {
                 .expect(200)
         })
     
-        test('If first test, it should respond with 201 created. Otherwise', async () => {
+        test('If first test, it should respond with 201 created. Otherwise 200', async () => {
             const response = await request(app)
                 .put('/urls')
                 .send({
