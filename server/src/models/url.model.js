@@ -1,7 +1,7 @@
 const urls = [
     {
         id: '1',
-        date: 'Mar 3',
+        date: new Date(),
         url: 'www.facebook.com',
         shortened_url: 'short1',
         visits: 0,
@@ -9,7 +9,7 @@ const urls = [
     },
     {
         id: '2',
-        date: 'Mar 3',
+        date: new Date(),
         url: 'www.amazon.com',
         shortened_url: 'short2',
         visits: 5,
@@ -17,13 +17,15 @@ const urls = [
     },
     {
         id: '3',
-        date: 'Mar 3',
+        date: new Date(),
         url: 'app.code.berlin',
         shortened_url: 'short3',
         visits: 3,
         creationAttempt: 1
     }
 ]
+
+const PORT = process.env.PORT || 'localhost:8000';
 
 const generateString = (length) => {
     var result = '';

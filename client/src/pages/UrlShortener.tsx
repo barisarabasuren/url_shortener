@@ -2,16 +2,20 @@ import React from 'react';
 import { Form, Input, message, Button, Space, List } from 'antd';
 import './urlShortener.css';
 import isURL from '../hooks/isUrl';
-import { httpGetAllUrls, httpPostNewUrl } from '../hooks/requests';
+import { httpPostNewUrl } from '../hooks/requests';
+import useUrls from '../hooks/useUrls';
+
 
 const UrlShortener: React.FC = () => {
     const [form] = Form.useForm();
-    const data = httpGetAllUrls();
 
-    const onFinish = () => {
+    const urls = useUrls();
+
+    console.log(urls)
+
+    const onFinish = async (values: {url: string} ) => {
+        await httpPostNewUrl(values);
         message.success('Submit success!');
-        httpPostNewUrl();
-        httpGetAllUrls();
     };
 
     const onFinishFailed = (errorMessage: string) => {
@@ -22,7 +26,7 @@ const UrlShortener: React.FC = () => {
         const url = values.url
         if(url) {
             if(url.length > 6 && isURL(url)) {
-                onFinish()
+                onFinish(values)
             } else {
                 onFinishFailed('Please type a valid url')
             }
@@ -66,42 +70,49 @@ const UrlShortener: React.FC = () => {
             </div>
             <List
                 itemLayout="horizontal"
-                dataSource={data}
+                dataSource={urls}
                 renderItem={item => (
                     <List.Item>
                         <List.Item.Meta
-                        title={
-                            <div className='shortened_area'>
-                               <p>{item.shortened_url}</p>
-                               <a href={`https://${item.shortened_url}`}>
-                                <img 
-                                    alt='redirect'
-                                    src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/20/000000/external-online-web-link-attach-with-url-information-text-bold-tal-revivo.png"/>
-                               </a>
-                               <img 
-                                alt='copy' 
-                                onClick={() => handleCopy(item.shortened_url)}
-                                src="https://img.icons8.com/fluency-systems-regular/20/000000/copy.png"/>
-                            </div>
-                               }
-                        description={item.url}
+                            title={
+                                <div className='shortened_area'>
+                                    <p>{item.shortened_url}</p>
+                                    <a 
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        href={`http://localhost:8000/${item.shortened_url}`}>
+                                        <img 
+                                            alt='redirect'
+                                            src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/20/000000/external-online-web-link-attach-with-url-information-text-bold-tal-revivo.png"/>
+                                    </a>
+                                    <img 
+                                        alt='copy' 
+                                        onClick={() => handleCopy(`http://localhost:8000/${item.shortened_url}`)}
+                                        src="https://img.icons8.com/fluency-systems-regular/20/000000/copy.png"/>
+                                </div>
+                            }
+                            description={item.url}
                         />
-                        <div style={{ marginRight: '50px' }}>
-                            <img 
-                                alt='created' 
-                                src="https://img.icons8.com/ios/20/000000/planner.png"
-                                style={{marginRight: '10px'}}
-                            />
-                            {item.date}
+                            <div style={{ marginRight: '50px' }}>
+                                Genarated {item.creationAttempt} times
                             </div>
-                        <div>
-                            <img 
-                                alt='visits' 
-                                src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/20/000000/external-history-instagram-flatart-icons-outline-flatarticons.png"
-                                style={{marginRight: '10px'}}
-                            />
-                            {item.visits}
-                        </div>
+                            <div style={{ marginRight: '50px' }}>
+                                <img 
+                                    alt='created' 
+                                    src="https://img.icons8.com/ios/20/000000/planner.png"
+                                    style={{marginRight: '10px'}}
+                                />
+                                {new Date(item.date).toLocaleDateString()}
+                                
+                            </div>
+                            <div>
+                                <img 
+                                    alt='visits' 
+                                    src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/20/000000/external-history-instagram-flatart-icons-outline-flatarticons.png"
+                                    style={{marginRight: '10px'}}
+                                />
+                                {item.visits}
+                            </div>
                     </List.Item>
                 )}
             />

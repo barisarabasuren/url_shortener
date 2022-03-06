@@ -1,32 +1,20 @@
-//TODO: get previous URLs
-const httpGetAllUrls = () => {
-    const data = [
-        {
-            date: 'Mar 3',
-            url: 'url1',
-            shortened_url: 'shorturl1',
-            visits: '0'
-        },
-        {
-            date: 'Mar 3',
-            url: 'url2',
-            shortened_url: 'shorturl2',
-            visits: '3'
-        },
-        {
-            date: 'Mar 3',
-            url: 'url3',
-            shortened_url: 'shorturl3',
-            visits: '5'
-        }
-    ];
+const API_URL = 'http://localhost:8000'
 
-    return data
+//TODO: get previous URLs
+const httpGetAllUrls =  async () => {
+    const response = await fetch(`${API_URL}/urls`);
+    return await response.json()
 }
 
 //TODO: post new URL
-const httpPostNewUrl = () => {
-    console.log('posting URL')
+const httpPostNewUrl = async (url: any) => {
+    return await fetch(`${API_URL}/urls`, {
+        method: "put",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(url)
+    });
 }
 
 export {
