@@ -1,12 +1,13 @@
-const API_URL = 'http://localhost:8000'
+//TODO: change API_URL to http://localhost:8000/ in development env.
+const API_URL = 'https://whispering-mesa-59217.herokuapp.com/'
 
-//TODO: get previous URLs
+
 const httpGetAllUrls =  async () => {
     const response = await fetch(`${API_URL}/urls`);
     return await response.json()
 }
 
-//TODO: post new URL
+
 const httpPostNewUrl = async (url: any) => {
     return await fetch(`${API_URL}/urls`, {
         method: "put",
