@@ -2,25 +2,24 @@ const {
     urls,
     getAllUrls,
     addNewUrl,
-    doesUrlExist,
+    findUrl,
     updateCreationAttempt,
-} = require('../../models/url.model')
+} = require('../../models/urls.model')
 
-const httpGetAllUrls = (req, res) => {
-    return res.status(200).json(getAllUrls())
+const httpGetAllUrls = async (req, res) => {
+    return res.status(200).json(await getAllUrls())
 }
 
-const httpHandleNewUrl = (req, res) => {
+const httpHandleNewUrl = async (req, res) => {
     const body = req.body;
 
-    const urlIndex = doesUrlExist(body)
+    const urlObj = await findUrl(body)
 
-    if(urlIndex || urlIndex === 0) {
-        updateCreationAttempt(urlIndex);
-        return res.status(200).json(body)
+    if(urlObj) {
+        updateCreationAttempt(urlObj);
+        return res.status(200).json(urlObj)
     } else {
-        addNewUrl(body);
-        return res.status(201).json(body);
+        return res.status(201).json(await addNewUrl(body));
     }
 }
 
