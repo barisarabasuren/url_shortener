@@ -6,11 +6,8 @@ const httpHandleShortenedUrl = async(req, res) => {
     const object = await findShortUrl(shortened_url)
 
     if(object) {
-        console.log('found')
         updateVisits(object.id)
         return res.redirect(`https://${object.url}`)
-    } else {
-        return res.send('short url not found')
     }
 }
 

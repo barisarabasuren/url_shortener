@@ -11,15 +11,14 @@ const httpGetAllUrls = async (req, res) => {
 }
 
 const httpHandleNewUrl = async (req, res) => {
-    const body = req.body;
-
-    const urlObj = await findUrl(body)
+    const urlObj = await findUrl(req.body)
 
     if(urlObj) {
-        updateCreationAttempt(urlObj);
-        return res.status(200).json(urlObj)
+        await updateCreationAttempt(urlObj);
+        return res.status(200).json(await findUrl(req.body))
     } else {
-        return res.status(201).json(await addNewUrl(body));
+        await addNewUrl(req.body)
+        return res.status(201).json(await findUrl(req.body));
     }
 }
 

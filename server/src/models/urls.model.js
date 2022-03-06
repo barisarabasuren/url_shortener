@@ -18,37 +18,37 @@ const getAllUrls = async () => {
     return urls.find({})
 }
 
-const findUrl = async (body) => {
-    return await urls.findOne(body)
+const findUrl = async (url) => {
+    return await urls.findOne(url)
 }
 
 const findShortUrl = async(shortened_url) => {
     return await urls.findOne({shortened_url})
 }
 
-const addNewUrl = async (data) => {
+const addNewUrl = async (body) => {
     const id = generateString(10)
     const shortened_url = generateString(5)
 
-    await urls.updateOne({
-        url: data.url
-    },{
-        id: id,
-        date: new Date(),
-        url: data.url,
-        shortened_url: shortened_url,
-        visits: 0,
-        creationAttempt: 1
-    }, {
-        upsert: true
-    }
-    ) 
-    return (shortened_url)
+    await urls.updateOne(
+        {
+        url: body.url
+        },{
+            id: id,
+            date: new Date(),
+            url: body.url,
+            shortened_url: shortened_url,
+            visits: 0,
+            creationAttempt: 1
+        }, {
+            upsert: true
+        }
+    )
 }
 
 const updateCreationAttempt = async (data) => {
     await urls.updateOne({
-        url: data.url
+        id: data.id
     },{
         $inc: {
             creationAttempt: 1

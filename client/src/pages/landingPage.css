@@ -4,6 +4,7 @@
     height: 100vh;
     justify-content: space-between;
     align-items: center;
+    transition: 1s;
 }
 
 .landing_page_top {
