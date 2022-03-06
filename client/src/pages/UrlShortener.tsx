@@ -13,7 +13,7 @@ const UrlShortener: React.FC = () => {
     
     const urls = useUrls();
     
-    const deployedAddress = 'https://whispering-mesa-59217.herokuapp.com/';
+    const deployedAddress = 'https://whispering-mesa-59217.herokuapp.com';
 
     const handleCopy = (url: string) => {
         message.success('Coppied to the clipboard')
