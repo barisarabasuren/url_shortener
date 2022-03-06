@@ -19,7 +19,7 @@ const useUrls = () => {
 
     useEffect(() => {
         getUrls()
-    }, [getUrls])
+    })
 
     return urls
 }

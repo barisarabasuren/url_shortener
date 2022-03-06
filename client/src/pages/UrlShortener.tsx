@@ -1,21 +1,46 @@
 import React from 'react'; 
-import { Form, Input, message, Button, Space, List } from 'antd';
+import { Form, Input, message, Button, Space, List, Modal } from 'antd';
 import './urlShortener.css';
 import isURL from '../hooks/isUrl';
 import { httpPostNewUrl } from '../hooks/requests';
 import useUrls from '../hooks/useUrls';
+import { SmileOutlined } from '@ant-design/icons';
 
 
 const UrlShortener: React.FC = () => {
     const [form] = Form.useForm();
-
+    const { confirm } = Modal;
+    
     const urls = useUrls();
+    
+    const deployedAddress = 'http://localhost:8000';
 
-    console.log(urls)
+    const handleCopy = (url: string) => {
+        message.success('Coppied to the clipboard')
+        navigator.clipboard.writeText(url)
+    }
+
+    function showPromiseConfirm(data: any) {
+        const shortened_url = `${deployedAddress}/${data.shortened_url}`;
+        confirm({
+          title: `Shortened url for '${data.url}'`,
+          icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+          content: shortened_url,
+          cancelText: 'Copy' ,
+          onOk() {
+            return new Promise((resolve, reject) => {
+              setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+            });
+          },
+          onCancel() {handleCopy(shortened_url)},
+        });
+      }
 
     const onFinish = async (values: {url: string} ) => {
-        await httpPostNewUrl(values);
-        message.success('Submit success!');
+        await httpPostNewUrl(values)
+            .then(response => response.json())
+            .then(data => showPromiseConfirm(data))
+        message.success('Url has been submitted!');
     };
 
     const onFinishFailed = (errorMessage: string) => {
@@ -33,11 +58,6 @@ const UrlShortener: React.FC = () => {
         } else {
             onFinishFailed('Please type a url.')
         }
-    }
-
-    const handleCopy = (url: string) => {
-        message.success('Coppied to the clipboard')
-        navigator.clipboard.writeText(url)
     }
 
     return(
@@ -76,18 +96,18 @@ const UrlShortener: React.FC = () => {
                         <List.Item.Meta
                             title={
                                 <div className='shortened_area'>
-                                    <p>{item.shortened_url}</p>
+                                    <p>/{item.shortened_url}</p>
                                     <a 
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        href={`http://localhost:8000/${item.shortened_url}`}>
+                                        href={`${deployedAddress}/${item.shortened_url}`}>
                                         <img 
                                             alt='redirect'
                                             src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/20/000000/external-online-web-link-attach-with-url-information-text-bold-tal-revivo.png"/>
                                     </a>
                                     <img 
                                         alt='copy' 
-                                        onClick={() => handleCopy(`http://localhost:8000/${item.shortened_url}`)}
+                                        onClick={() => handleCopy(`${deployedAddress}/${item.shortened_url}`)}
                                         src="https://img.icons8.com/fluency-systems-regular/20/000000/copy.png"/>
                                 </div>
                             }
