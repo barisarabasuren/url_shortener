@@ -13,7 +13,7 @@ This repository contains two components:
 ### Techstack
 The entire backend of url shortener is written using:
 - [node.js](https://nodejs.org/en/)
-- [MongoDb Atlas](hhttps://www.mongodb.com/atlas/database)
+- [MongoDb Atlas](hhttps://www.mongodb.com/atlas/database/)
 
 
 Extra libraries used were:
