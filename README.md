@@ -6,7 +6,7 @@ This repository contains two components:
 
 # Architecture
 ### High-Level Overview
-![Architecture](./image/architecture.jpg?raw=true)
+![Architecture](./images/architecture.jpg?raw=true)
 
 # Backend
 
