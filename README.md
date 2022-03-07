@@ -22,7 +22,7 @@ Extra libraries used were:
 
 ### Installation
 Requirements:
-* - [node.js](https://nodejs.org/en/)
+* [node.js](https://nodejs.org/en/)
 
 To run the backend service you have to clone the repository:
 ```zsh
