@@ -1,4 +1,4 @@
-//TODO: change API_URL to http://localhost:8000 in development env.
+//NOTE: change API_URL to http://localhost:8000 in development env.
 
 const API_URL = 'https://whispering-mesa-59217.herokuapp.com'
 
