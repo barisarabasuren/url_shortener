@@ -1,12 +1,12 @@
 # url_shortener
 
 This repository contains two components:
-* the **frontend**, which provides a client for url shortenings ([Build file is served on root of server))
+* the **frontend**, which provides a client for url shortenings (Build file is served on root of server)
 * the **server**, which provides the API to manage url shortening([Deployed on Heroku](https://fairvote-kbuqsc2ymq-ey.a.run.app/docs/schema/swagger-ui/#/))
 
 # Architecture
 ### High-Level Overview
-![Architecture](./images/architecture.jpg?raw=true)
+![Architecture](./images/architecture.jpeg?raw=true)
 
 # Backend
 
