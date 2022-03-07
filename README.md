@@ -48,7 +48,7 @@ Extra libraries used were:
 
 ### Installation
 
-To run the backend service you have to clone the repository:
+To run the frontend service you have to clone the repository:
 ```zsh
 git clone https://github.com/barisarabasuren/url_shortener
 cd ./urs_shortener
