@@ -27,7 +27,7 @@ Requirements:
 To run the backend service you have to clone the repository:
 ```zsh
 git clone https://github.com/barisarabasuren/url_shortener
-cd ./urs_shortener
+cd ./url_shortener
 npm run install
 npm run start
 ```
@@ -51,7 +51,7 @@ Extra libraries used were:
 To run the frontend service you have to clone the repository:
 ```zsh
 git clone https://github.com/barisarabasuren/url_shortener
-cd ./urs_shortener
+cd ./url_shortener
 npm run install-client
 npm run client
 ```
