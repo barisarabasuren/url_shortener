@@ -2,7 +2,7 @@
 
 This repository contains two components:
 * the **frontend**, which provides a client for url shortenings (Build file is served on root of server)
-* the **server**, which provides the API to manage url shortening([Deployed on Heroku](https://whispering-mesa-59217.herokuapp.com/)
+* the **server**, which provides the API to manage url shortening([Deployed on Heroku](https://whispering-mesa-59217.herokuapp.com/))
 
 # Architecture
 ### High-Level Overview
